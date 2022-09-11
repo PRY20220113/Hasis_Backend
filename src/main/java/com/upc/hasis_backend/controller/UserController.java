@@ -125,6 +125,7 @@ public class UserController {
 
                     HttpHeaders responseHeaders = new HttpHeaders();
                     responseHeaders.set("Token", UtilService.getJWTToken(request.getDni()));
+                    responseHeaders.set("Rol", user.getRol());
 
                     return new ResponseEntity<>(responseDTO, responseHeaders,HttpStatus.OK);
                 } else {

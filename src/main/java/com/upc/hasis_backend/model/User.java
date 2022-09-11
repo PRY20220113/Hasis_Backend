@@ -1,5 +1,6 @@
 package com.upc.hasis_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,6 +47,7 @@ public class User {
     @Column(length = 1, nullable = false)
     private String sex;
 
+    @JsonIgnore
     private LocalDate registerDate;
 
     //D-P
