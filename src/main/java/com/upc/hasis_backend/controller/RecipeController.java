@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/recipe")
 public class RecipeController {
@@ -77,6 +79,32 @@ public class RecipeController {
     }
 
 
+    @GetMapping("/patient/record")
+    public ResponseEntity<ResponseDTO<List<Recipe>>> getRecordOfRecipesByPatient(@RequestParam Long patientId){
+
+        ResponseDTO<List<Recipe>> responseDTO = new ResponseDTO<>();
+        try {
+            Patient patient = patientService.findPatientById(patientId);
+            if (patient == null){
+                responseDTO.setErrorMessage("El paciente no existe.");
+                responseDTO.setErrorCode(1);
+                responseDTO.setData(null);
+                return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
+            }
+            responseDTO.setData(recipeService.findRecordOfRecipesByPatient(patientId));
+            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
+        }catch (Exception e){
+            responseDTO.setErrorMessage(e.getMessage());
+            responseDTO.setHttpCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            responseDTO.setErrorCode(2);
+            responseDTO.setData(null);
+            return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @PostMapping()
     public ResponseEntity<ResponseDTO<Recipe>> createRecipe(@RequestBody CreateRecipeRequestDTO recipeRequestDTO){
 
@@ -100,7 +128,7 @@ public class RecipeController {
 
             responseDTO.setHttpCode(HttpStatus.CREATED.value());
             responseDTO.setData(recipeService.createRecipe(recipeRequestDTO, doctor, patient));
-            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+            return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
 
         }catch (Exception e){
             responseDTO.setErrorMessage(e.getMessage());

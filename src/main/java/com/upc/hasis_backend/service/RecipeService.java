@@ -33,6 +33,10 @@ public class RecipeService {
         return recipeRepository.findActiveRecipeByPatient(patientId);
     }
 
+    public List<Recipe> findRecordOfRecipesByPatient(Long patientId){
+        return recipeRepository.findRecordOfRecipesByPatient(patientId);
+    }
+
     public Recipe createRecipe(CreateRecipeRequestDTO createRecipeRequestDTO, Doctor doctor, Patient patient){
 
 
