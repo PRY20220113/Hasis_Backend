@@ -14,6 +14,7 @@ public class CreateRecipeRequestDTO {
     private Long patientId;
     private Long doctorId;
     private List<CreateMedicineRequestDTO> medicines;
+    private String description;
 
 
 }

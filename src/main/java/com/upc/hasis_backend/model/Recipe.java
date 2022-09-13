@@ -38,5 +38,6 @@ public class Recipe {
     private List<Medicine> medicines = new ArrayList<>();
 
 
+    private String description;
 
 }

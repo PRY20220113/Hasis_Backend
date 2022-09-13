@@ -47,11 +47,11 @@ public class RecipeService {
             lastRecipe = recipeRepository.save(lastRecipe);
         }
 
-
         Recipe recipe = new Recipe();
         recipe.setDoctor(doctor);
         recipe.setPatient(patient);
         recipe.setStatus(1);
+        recipe.setDescription(createRecipeRequestDTO.getDescription());
 
         try {
             recipe = recipeRepository.save(recipe);
@@ -75,7 +75,6 @@ public class RecipeService {
             return recipe;
         } catch (Exception e){
             e.printStackTrace();
-
         }
         return null;
     }
