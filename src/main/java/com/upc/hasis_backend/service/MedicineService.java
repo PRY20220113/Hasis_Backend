@@ -28,7 +28,6 @@ public class MedicineService {
     public Medicine updateMedicine(Medicine medicine, UpdateMedicineRequestDTO createMedicineRequestDTO){
         medicine.setWeight(createMedicineRequestDTO.getWeight());
         medicine.setEachHour(createMedicineRequestDTO.getEachHour());
-        medicine.setPrescribedDays(createMedicineRequestDTO.getPrescribedDays());
         medicine.setQuantity(createMedicineRequestDTO.getQuantity());
         medicine.setEndDate(UtilService.getEndDay(medicine.getPrescribedDays()));
         return  medicineRepository.save(medicine);

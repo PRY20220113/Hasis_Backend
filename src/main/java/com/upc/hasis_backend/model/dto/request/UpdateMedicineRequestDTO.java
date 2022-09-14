@@ -13,5 +13,4 @@ public class UpdateMedicineRequestDTO {
     private Integer weight;
     private Integer quantity;
     private Integer eachHour;
-    private Integer prescribedDays;
 }
