@@ -92,7 +92,30 @@ public class RecipeController {
             return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/patient/speciality/active")
+    public ResponseEntity<ResponseDTO<List<Speciality>>> getActiveSpecialityByPatient(@RequestParam Long patientId){
 
+        ResponseDTO<List<Speciality>> responseDTO = new ResponseDTO<>();
+        try {
+            List<Speciality> specialities = recipeService.findActivySpecialityByPatient(patientId);
+            if (specialities == null){
+                responseDTO.setErrorMessage("El paciente no tiene una recetas activas y por lo tanto tampoco especialidades.");
+                responseDTO.setErrorCode(1);
+                responseDTO.setData(null);
+                return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
+            }
+            responseDTO.setData(specialities);
+            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
+        }catch (Exception e){
+            responseDTO.setErrorMessage(e.getMessage());
+            responseDTO.setHttpCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            responseDTO.setErrorCode(2);
+            responseDTO.setData(null);
+            return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/patient/speciality")
     public ResponseEntity<ResponseDTO<Recipe>> getActiveRecipeByPatientAndSpeciality(@RequestParam Long patientId, @RequestParam Long specialityId){
@@ -119,8 +142,6 @@ public class RecipeController {
         }
     }
 
-
-
     @GetMapping("/patient/record")
     public ResponseEntity<ResponseDTO<List<Recipe>>> getRecordOfRecipesByPatient(@RequestParam Long patientId){
 
@@ -145,7 +166,6 @@ public class RecipeController {
             return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
     @PostMapping()
     public ResponseEntity<ResponseDTO<Recipe>> createRecipe(@RequestBody CreateRecipeRequestDTO recipeRequestDTO){
@@ -184,6 +204,31 @@ public class RecipeController {
             responseDTO.setErrorMessage(e.getMessage());
             responseDTO.setHttpCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             responseDTO.setErrorCode(4);
+            responseDTO.setData(null);
+            return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/close")
+    public ResponseEntity<ResponseDTO<Recipe>> closeRecipe(@RequestParam Long recipeId){
+
+        ResponseDTO<Recipe> responseDTO = new ResponseDTO<>();
+        try {
+            Recipe recipe = recipeService.findRecipeById(recipeId);
+            if (recipe == null){
+                responseDTO.setErrorMessage("La receta no existe.");
+                responseDTO.setErrorCode(1);
+                responseDTO.setData(null);
+                return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
+            }
+            responseDTO.setData(recipeService.closeRecipe(recipe));
+            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
+        }catch (Exception e){
+            responseDTO.setErrorMessage(e.getMessage());
+            responseDTO.setHttpCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            responseDTO.setErrorCode(2);
             responseDTO.setData(null);
             return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }

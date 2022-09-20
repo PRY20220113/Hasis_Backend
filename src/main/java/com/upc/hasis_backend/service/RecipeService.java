@@ -1,9 +1,6 @@
 package com.upc.hasis_backend.service;
 
-import com.upc.hasis_backend.model.Doctor;
-import com.upc.hasis_backend.model.Medicine;
-import com.upc.hasis_backend.model.Patient;
-import com.upc.hasis_backend.model.Recipe;
+import com.upc.hasis_backend.model.*;
 import com.upc.hasis_backend.model.dto.request.CreateMedicineRequestDTO;
 import com.upc.hasis_backend.model.dto.request.CreateRecipeRequestDTO;
 import com.upc.hasis_backend.repository.MedicineRepository;
@@ -13,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RecipeService {
@@ -37,8 +36,18 @@ public class RecipeService {
         return recipeRepository.findActiveRecipeByPatientAndSpeciality(patientId, specialityId);
     }
 
+    public List<Speciality> findActivySpecialityByPatient(Long patientId){
+        List<Speciality> specialities = new ArrayList<>(recipeRepository.findActiveSpecialityByPatient(patientId));
+        return new ArrayList<>(specialities);
+    }
+
     public List<Recipe> findRecordOfRecipesByPatient(Long patientId){
         return recipeRepository.findRecordOfRecipesByPatient(patientId);
+    }
+
+    public Recipe closeRecipe(Recipe recipe){
+        recipe.setStatus(0);
+        return recipeRepository.save(recipe);
     }
 
     public Recipe createRecipe(CreateRecipeRequestDTO createRecipeRequestDTO, Doctor doctor, Patient patient){
