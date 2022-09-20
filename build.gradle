@@ -2,10 +2,11 @@ plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
+	id "com.microsoft.azure.azurewebapp" version "1.2.0"
 }
 
 group = 'com.upc'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '1.8'
 
 tasks.bootJar {
@@ -13,9 +14,23 @@ tasks.bootJar {
 }
 
 
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
+	}
+}
+
+azurewebapp {
+	subscription = '8b880d1b-ea81-4221-8efe-162427702f5f'
+	resourceGroup = 'hasis_app'
+	appName = 'hasis-backend'
+	pricingTier = 'B1'
+	region = 'eastus'
+	runtime {
+		os = 'Linux'
+		webContainer = 'Java SE'
+		javaVersion = 'Java 8'
 	}
 }
 

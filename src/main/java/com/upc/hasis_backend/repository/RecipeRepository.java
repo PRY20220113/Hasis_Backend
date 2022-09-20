@@ -18,6 +18,9 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     public List<Recipe> findRecordOfRecipesByPatient(Long patientId);
 
     @Query("select r from Recipe r where r.patient.patientId = ?1 and r.status = 1")
-    public Recipe findActiveRecipeByPatient(Long patientId);
+    public List<Recipe> findActiveRecipesByPatient(Long patientId);
+    @Query("select r from Recipe r where r.patient.patientId = ?1 and r.status = 1 and r.doctor.speciality.specialityId = ?2")
+    public Recipe findActiveRecipeByPatientAndSpeciality(Long patientId, Long specialityId);
+
 
 }

@@ -25,7 +25,7 @@ public class HasisBackendApplication {
 			http.csrf().disable()
 					.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 					.authorizeRequests()
-					.antMatchers("/user/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+					.antMatchers("/user/**", "/speciality/**", "/doctor/registerInitialDoctors","/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
 					.anyRequest().authenticated();
 		}
 	}

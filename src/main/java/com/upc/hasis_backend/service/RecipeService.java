@@ -29,8 +29,12 @@ public class RecipeService {
         return recipeRepository.findById(id).orElse(null);
     }
 
-    public Recipe findActiveRecipeByPatient(Long patientId){
-        return recipeRepository.findActiveRecipeByPatient(patientId);
+    public List<Recipe> findActiveRecipeByPatient(Long patientId){
+        return recipeRepository.findActiveRecipesByPatient(patientId);
+    }
+
+    public Recipe findActiveRecipeByPatientAndSpeciality(Long patientId, Long specialityId){
+        return recipeRepository.findActiveRecipeByPatientAndSpeciality(patientId, specialityId);
     }
 
     public List<Recipe> findRecordOfRecipesByPatient(Long patientId){
@@ -41,7 +45,7 @@ public class RecipeService {
 
 
 
-        Recipe lastRecipe = recipeRepository.findActiveRecipeByDoctorAndPatient(doctor.getDoctorId(), patient.getPatientId());
+        Recipe lastRecipe = recipeRepository.findActiveRecipeByPatientAndSpeciality(patient.getPatientId(), doctor.getSpeciality().getSpecialityId());
         if (lastRecipe != null){
             lastRecipe.setStatus(0);
             lastRecipe = recipeRepository.save(lastRecipe);

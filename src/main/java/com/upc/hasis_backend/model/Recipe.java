@@ -22,12 +22,10 @@ public class Recipe {
     @Column(unique = true, nullable = false)
     private Long recipeId;
 
-    @JsonIgnore
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "patientId",nullable = false)
     private Patient patient;
 
-    @JsonIgnore
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "doctorId",nullable = false)
     private Doctor doctor;

@@ -22,5 +22,6 @@ public class RegisterDoctorDTO {
     private String phone;
     private String sex;
     private String license;
+    private Long specialityId;
 
 }

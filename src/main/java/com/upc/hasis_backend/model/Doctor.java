@@ -1,5 +1,6 @@
 package com.upc.hasis_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +26,8 @@ public class Doctor {
     @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "userId",nullable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "specialityId",nullable = false)
+    private Speciality speciality;
 }

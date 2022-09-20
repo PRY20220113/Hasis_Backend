@@ -2,6 +2,7 @@ package com.upc.hasis_backend.service;
 
 import com.upc.hasis_backend.model.Doctor;
 import com.upc.hasis_backend.model.Patient;
+import com.upc.hasis_backend.model.Speciality;
 import com.upc.hasis_backend.model.User;
 import com.upc.hasis_backend.model.dto.request.RegisterDoctorDTO;
 import com.upc.hasis_backend.model.dto.request.RegisterPatientDTO;
@@ -26,6 +27,9 @@ public class UserService {
     @Autowired
     PatientRepository patientRepository;
 
+    @Autowired
+    SpecialityService specialityService;
+
     public Doctor registerDoctor(RegisterDoctorDTO registerDoctorDTO){
 
         User user = new User();
@@ -43,7 +47,12 @@ public class UserService {
 
         Doctor doctor = new Doctor();
         doctor.setLicense(registerDoctorDTO.getLicense());
+
+
+
         try {
+            Speciality speciality = specialityService.findSpecialityById(registerDoctorDTO.getSpecialityId());
+            doctor.setSpeciality(speciality);
             user = userRepository.save(user);
             doctor.setUser(user);
             doctor = doctorRepository.save(doctor);

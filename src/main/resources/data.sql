@@ -1,1 +1,88 @@
 SET FOREIGN_KEY_CHECKS=0;
+
+
+INSERT INTO `hasis_db`.`speciality`(`speciality_id`,`description`,`name`)
+VALUES (1,"","Odontologíaa"),
+       (2,"","Oftalmología"),
+       (3,"","Cardiología"),
+       (4,"","Neurología"),
+       (5,"","Estomatología"),
+        (6,"","Medicina humana");
+
+
+
+
+[
+    {
+      "dni": "71811376",
+      "firstName": "Bryan Antony",
+      "lastName": "Miramira Morales",
+      "email": "bbqms@hotmail.com",
+      "password": "bryanxd123",
+      "birthDate": "2000-08-31",
+      "phone": "950040337",
+      "sex": "M",
+      "license": "12346",
+      "specialityId": 2
+    },
+    {
+      "dni": "71811370",
+      "firstName": "Jorge Antony",
+      "lastName": "Campos De la Fuente",
+      "email": "doctor2@hotmail.com",
+      "password": "doctor2",
+      "birthDate": "1996-09-15",
+      "phone": "950040330",
+      "sex": "M",
+      "license": "12345",
+      "specialityId": 1
+    },
+    {
+      "dni": "71811371",
+      "firstName": "Rodrigo Alonso",
+      "lastName": "Moreno Moreno",
+      "email": "doctor3@hotmail.com",
+      "password": "doctor3",
+      "birthDate": "1992-08-31",
+      "phone": "950040331",
+      "sex": "M",
+      "license": "12344",
+      "specialityId": 3
+    },
+        {
+      "dni": "71811372",
+      "firstName": "Vivian Luz",
+      "lastName": "Malqui Quispe",
+      "email": "doctor4@hotmail.com",
+      "password": "doctor4",
+      "birthDate": "1993-08-31",
+      "phone": "950040331",
+      "sex": "F",
+      "license": "12343",
+      "specialityId": 4
+    },
+        {
+      "dni": "71811373",
+      "firstName": "Maurico Roger",
+      "lastName": "Cabrera Morales",
+      "email": "doctor5@hotmail.com",
+      "password": "doctor5",
+      "birthDate": "1994-08-31",
+      "phone": "950040331",
+      "sex": "M",
+      "license": "12342",
+      "specialityId": 5
+    },
+        {
+      "dni": "71811374",
+      "firstName": "Pierina Laura",
+      "lastName": "Neyra Izquierda",
+      "email": "doctor6@hotmail.com",
+      "password": "doctor6",
+      "birthDate": "1999-08-31",
+      "phone": "95004031",
+      "sex": "F",
+      "license": "12341",
+      "specialityId": 6
+    },
+]
